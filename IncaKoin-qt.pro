@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = IncaKoin-qt
 macx:TARGET = "IncaKoin-Qt"
-VERSION = 1.5.2.0
+VERSION = 1.5.2.1
 INCLUDEPATH += src src/json src/qt
 QT += network core gui
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
@@ -19,11 +19,11 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 # use: BOOST_THREAD_LIB_SUFFIX=_win32-...
 # or when linking against a specific BerkelyDB version: BDB_LIB_SUFFIX=-4.8
 win32 {
-    #BOOST_LIB_SUFFIX=-mgw49-mt-s-1_57
-    #BOOST_INCLUDE_PATH=C:/deps/boost_1_57_0
-    #BOOST_LIB_PATH=C:/deps/boost_1_57_0/stage/lib
-    #BDB_INCLUDE_PATH=C:/deps/db-5.1.29.NC/build_unix
-    #BDB_LIB_PATH=C:/deps/db-5.1.29.NC/build_unix
+    BOOST_LIB_SUFFIX=-mt
+    BOOST_INCLUDE_PATH=C:/msys64/mingw64/include
+    BOOST_LIB_PATH=C:/msys64/mingw64/boost
+    #BDB_INCLUDE_PATH=C:/msys64/mingw64/include
+    #BDB_LIB_PATH=C:/devel/
     #OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.2p/include
     #OPENSSL_LIB_PATH=C:/deps/openssl-1.0.2p
     #MINIUPNPC_INCLUDE_PATH=C:/deps/
@@ -72,7 +72,7 @@ QMAKE_CXXFLAGS *= -D_FORTIFY_SOURCE=2
 win32:QMAKE_LFLAGS *= -Wl,--dynamicbase -Wl,--nxcompat
 
 # on Windows: enable GCC large address aware linker flag
-win32:QMAKE_LFLAGS *= -Wl,--large-address-aware -static
+#win32:QMAKE_LFLAGS *= -Wl,--large-address-aware -static
 
 # i686-w64-mingw32
 win32:QMAKE_LFLAGS *= -static-libgcc -static-libstdc++

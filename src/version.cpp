@@ -12,7 +12,7 @@
 const std::string CLIENT_NAME("IncaKoin");
 
 // Client version number
-#define CLIENT_VERSION_SUFFIX   ""
+#define CLIENT_VERSION_SUFFIX   "-Mama_Quilla"
 
 
 // The following part of the code determines the CLIENT_BUILD variable.
@@ -47,7 +47,7 @@ const std::string CLIENT_NAME("IncaKoin");
     "v" DO_STRINGIZE(maj) "." DO_STRINGIZE(min) "." DO_STRINGIZE(rev) "." DO_STRINGIZE(build) "-g" commit
 
 #define BUILD_DESC_FROM_UNKNOWN(maj,min,rev,build) \
-    "v" DO_STRINGIZE(maj) "." DO_STRINGIZE(min) "." DO_STRINGIZE(rev) "." DO_STRINGIZE(build) "-Mama_Quilla"
+    "v" DO_STRINGIZE(maj) "." DO_STRINGIZE(min) "." DO_STRINGIZE(rev) "." DO_STRINGIZE(build) "-unk"
 
 #ifndef BUILD_DESC
 #    ifdef BUILD_SUFFIX

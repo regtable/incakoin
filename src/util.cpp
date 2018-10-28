@@ -1161,7 +1161,7 @@ void CreatePidFile(const boost::filesystem::path &path, pid_t pid)
     FILE* file = fopen(path.string().c_str(), "w");
     if (file)
     {
-        fprintf(file, "%d\n", pid);
+        fprintf(file, "%lld\n", pid);
         fclose(file);
     }
 }

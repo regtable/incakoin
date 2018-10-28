@@ -885,7 +885,7 @@ void ThreadSocketHandler2(void* parg)
 
                     if (nPos > ReceiveBufferSize()) {
                         if (!pnode->fDisconnect)
-                            printf("socket recv flood control disconnect (%"PRIszu" bytes)\n", vRecv.size());
+                            printf("socket recv flood control disconnect (%" PRIszu " bytes)\n", vRecv.size());
                         pnode->CloseSocketDisconnect();
                     }
                     else {
@@ -1234,7 +1234,7 @@ void DumpAddresses()
     CAddrDB adb;
     adb.Write(addrman);
 
-    printf("Flushed %d addresses to peers.dat  %"PRI64d"ms\n",
+    printf("Flushed %d addresses to peers.dat  %" PRI64d "ms\n",
            addrman.size(), GetTimeMillis() - nStart);
 }
 
@@ -1879,8 +1879,12 @@ void StartNode(void* parg)
 
     // ppcoin: mint proof-of-stake blocks in the background
     if (GetBoolArg("-staking", true) && GetBoolArg("-stake", true))
+    {
         if (!NewThread(ThreadStakeMinter, pwalletMain))
+        {
             printf("Error: NewThread(ThreadStakeMinter) failed\n");
+        }
+    }
     else
         printf("Staking disabled\n");
 

@@ -16,6 +16,10 @@
 #include <QScrollBar>
 
 #include <openssl/crypto.h>
+#include <db_cxx.h>
+#include <boost/version.hpp>
+#include <miniupnpc/miniupnpc.h>
+#include <qrencode.h>
 
 // TODO: make it possible to filter out categories (esp debug messages when implemented)
 // TODO: receive errors and debug messages through ClientModel
@@ -192,6 +196,10 @@ RPCConsole::RPCConsole(QWidget *parent) :
     ui(new Ui::RPCConsole),
     historyPtr(0)
 {
+    int major = 0;
+    int minor = 0;
+    int patch = 0;
+
     ui->setupUi(this);
 
 #ifndef Q_OS_MAC
@@ -207,7 +215,11 @@ RPCConsole::RPCConsole(QWidget *parent) :
 
     // set OpenSSL version label
     ui->openSSLVersion->setText(SSLeay_version(SSLEAY_VERSION));
-
+    ui->label_bdb_version->setText(DbEnv::version(&major, &minor, &patch));
+    ui->label_boost_version->setText(BOOST_LIB_VERSION);
+    ui->label_miniupnp_version->setText(MINIUPNPC_VERSION);
+    ui->lable_openssl_version->setText(SSLeay_version(SSLEAY_VERSION));
+    ui->lable_qrencode_version->setText(QRcode_APIVersionString());
     startExecutor();
 
     clear();

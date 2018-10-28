@@ -62,6 +62,9 @@ namespace boost {
 
 using namespace std;
 
+static const long LOG_BUFFERSIZE  =  8000000;
+static const long LOG_SHRINKSIZE  = 50000000; // 50 MB
+
 map<string, string> mapArgs;
 map<string, vector<string> > mapMultiArgs;
 bool fDebug = false;
@@ -371,7 +374,7 @@ string FormatMoney(int64 n, bool fPlus)
     int64 n_abs = (n > 0 ? n : -n);
     int64 quotient = n_abs/COIN;
     int64 remainder = n_abs%COIN;
-    string str = strprintf("%"PRI64d".%06"PRI64d, quotient, remainder);
+    string str = strprintf("%" PRI64d ".%06" PRI64d, quotient, remainder);
 
     // Right-trim excess zeros before the decimal point:
     int nTrim = 0;
@@ -1199,20 +1202,32 @@ void ShrinkDebugFile()
     // Scroll debug.log if it's getting too big
     boost::filesystem::path pathLog = GetDataDir() / "debug.log";
     FILE* file = fopen(pathLog.string().c_str(), "r");
-    if (file && GetFilesize(file) > 10 * 1000000)
-    {
-        // Restart the file with some of the end
-        char pch[200000];
-        fseek(file, -sizeof(pch), SEEK_END);
-        int nBytes = fread(pch, 1, sizeof(pch), file);
-        fclose(file);
 
-        file = fopen(pathLog.string().c_str(), "w");
-        if (file)
-        {
-            fwrite(pch, 1, nBytes, file);
+    if (file && boost::filesystem::file_size(pathLog) > LOG_SHRINKSIZE)
+    {
+            // Restart the file with some of the end
+            char* pch = new char[LOG_BUFFERSIZE];
+            if (NULL != pch)
+            {
+                fseek(file, -LOG_BUFFERSIZE, SEEK_END);
+                int nBytes = fread(pch, 1, LOG_BUFFERSIZE, file);
+                fclose(file);
+                file = NULL;
+
+                file = fopen(pathLog.string().c_str(), "w");
+                if (file)
+                {
+                    fwrite(pch, 1, nBytes, file);
+                    fclose(file);
+                    file = NULL;
+                }
+                delete[] pch;
+            }
+    }
+    else if (NULL != file)
+    {
             fclose(file);
-        }
+            file = NULL;
     }
 }
 
@@ -1262,7 +1277,7 @@ void AddTimeData(const CNetAddr& ip, int64 nTime)
 
     // Add data
     vTimeOffsets.input(nOffsetSample);
-    printf("Added time data, samples %d, offset %+"PRI64d" (%+"PRI64d" minutes)\n", vTimeOffsets.size(), nOffsetSample, nOffsetSample/60);
+    printf("Added time data, samples %d, offset %+" PRI64d " (%+" PRI64d " minutes)\n", vTimeOffsets.size(), nOffsetSample, nOffsetSample/60);
     if (vTimeOffsets.size() >= 5 && vTimeOffsets.size() % 2 == 1)
     {
         int64 nMedian = vTimeOffsets.median();
@@ -1297,10 +1312,10 @@ void AddTimeData(const CNetAddr& ip, int64 nTime)
         }
         if (fDebug) {
             BOOST_FOREACH(int64 n, vSorted)
-                printf("%+"PRI64d"  ", n);
+                printf("%+" PRI64d "  ", n);
             printf("|  ");
         }
-        printf("nTimeOffset = %+"PRI64d"  (%+"PRI64d" minutes)\n", nTimeOffset, nTimeOffset/60);
+        printf("nTimeOffset = %+" PRI64d "  (%+" PRI64d " minutes)\n", nTimeOffset, nTimeOffset/60);
     }
 }
 

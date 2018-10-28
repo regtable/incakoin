@@ -37,11 +37,11 @@ int64 GetWeight(int64 nIntervalBeginning, int64 nIntervalEnd)
 
     if (nIntervalBeginning < nForkTime) {
         if (fDebug)
-            printf("GetWeight(): Weight=%lld\n", min(nIntervalEnd - nIntervalBeginning, (int64)nStakeMaxAge) - nStakeMinAgeOld);
+            printf("GetWeight(): Weight=%ld\n", min(nIntervalEnd - nIntervalBeginning, (int64)nStakeMaxAge) - nStakeMinAgeOld);
         return min(nIntervalEnd - nIntervalBeginning, (int64)nStakeMaxAge) - nStakeMinAgeOld;
     } else {
         if (fDebug)
-            printf("GetWeight(): Weight=%lld\n", min(nIntervalEnd - nIntervalBeginning, (int64)nStakeMaxAge) - nStakeMinAgeNew);
+            printf("GetWeight(): Weight=%ld\n", min(nIntervalEnd - nIntervalBeginning, (int64)nStakeMaxAge) - nStakeMinAgeNew);
         return min(nIntervalEnd - nIntervalBeginning, (int64)nStakeMaxAge) - nStakeMinAgeNew; // Changed
     }
 }

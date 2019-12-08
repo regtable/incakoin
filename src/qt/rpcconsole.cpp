@@ -53,7 +53,6 @@ signals:
 };
 
 #include "rpcconsole.moc"
-
 void RPCExecutor::start()
 {
    // Nothing to do

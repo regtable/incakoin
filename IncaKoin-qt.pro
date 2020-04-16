@@ -19,17 +19,17 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 # use: BOOST_THREAD_LIB_SUFFIX=_win32-...
 # or when linking against a specific BerkelyDB version: BDB_LIB_SUFFIX=-4.8
 win32 {
-    BOOST_LIB_SUFFIX=-mt
-    BOOST_INCLUDE_PATH=C:/msys64/mingw64/include
-    BOOST_LIB_PATH=C:/msys64/mingw64/boost
-    #BDB_INCLUDE_PATH=C:/msys64/mingw64/include
-    #BDB_LIB_PATH=C:/devel/
-    #OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.2p/include
-    #OPENSSL_LIB_PATH=C:/deps/openssl-1.0.2p
-    #MINIUPNPC_INCLUDE_PATH=C:/deps/
-    #MINIUPNPC_LIB_PATH=C:/deps/miniupnpc
-    #QRENCODE_INCLUDE_PATH=C:/deps/qrencode-4.0.2
-    #QRENCODE_LIB_PATH=C:/deps/qrencode-4.0.2/.libs
+   BOOST_LIB_SUFFIX=-mgw83-mt-s-x64-1_68
+    BOOST_INCLUDE_PATH=C:/deps/64bit/boost_1_68_0
+   BOOST_LIB_PATH=C:/deps/64bit/boost_1_68_0/stage/lib
+    BDB_INCLUDE_PATH=C:/deps/64bit/db-6.2.32.NC/build_unix
+ BDB_LIB_PATH=C:/deps/64bit/db-6.2.32.NC/build_unix
+    OPENSSL_INCLUDE_PATH=C:/deps/64bit/openssl-1.0.2u/include
+    OPENSSL_LIB_PATH=C:/deps/64bit/openssl-1.0.2u
+    MINIUPNPC_INCLUDE_PATH=C:/deps/64bit/miniupnpc
+    MINIUPNPC_LIB_PATH=C:/deps/64bit/miniupnpc
+    QRENCODE_INCLUDE_PATH=C:/deps/64bit/qrencode-4.0.2
+   QRENCODE_LIB_PATH=C:/deps/64bit/qrencode-4.0.2/.libs
 }
 # Dependency library locations can be customized with:
 #    BOOST_INCLUDE_PATH, BOOST_LIB_PATH, BDB_INCLUDE_PATH,

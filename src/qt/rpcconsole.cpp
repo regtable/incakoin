@@ -18,7 +18,7 @@
 #include <openssl/crypto.h>
 #include <db_cxx.h>
 #include <boost/version.hpp>
-#include <miniupnpc.h>
+#include <miniupnpc/miniupnpc.h>
 #include <qrencode.h>
 
 // TODO: make it possible to filter out categories (esp debug messages when implemented)
@@ -218,8 +218,7 @@ RPCConsole::RPCConsole(QWidget *parent) :
     ui->label_boost_version->setText(BOOST_LIB_VERSION);
     ui->label_miniupnp_version->setText(MINIUPNPC_VERSION);
     ui->lable_openssl_version->setText(SSLeay_version(SSLEAY_VERSION));
-   # ifdef USE_QRCODE
-  #endif
+    ui->lable_qrencode_version->setText(QRcode_APIVersionString());
     startExecutor();
 
     clear();

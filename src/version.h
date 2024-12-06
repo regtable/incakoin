@@ -25,7 +25,7 @@ extern const std::string CLIENT_DATE;
 // network protocol versioning
 //
 
-static const int PROTOCOL_VERSION = 90060;
+static const int PROTOCOL_VERSION = 90062;
 
 // intial proto version, to be increased after version/verack negotiation
 static const int INIT_PROTO_VERSION = 209;
@@ -51,7 +51,7 @@ static const int MEMPOOL_GD_VERSION = 60002;
 
 #define DISPLAY_VERSION_MAJOR       1
 #define DISPLAY_VERSION_MINOR       5
-#define DISPLAY_VERSION_REVISION    2
+#define DISPLAY_VERSION_REVISION    3
 #define DISPLAY_VERSION_BUILD       0
 
 #endif

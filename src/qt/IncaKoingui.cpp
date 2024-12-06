@@ -93,7 +93,7 @@ IncaKoinGUI::IncaKoinGUI(QWidget *parent):
     nWeight(0)
 {
     resize(850, 550);
-    setWindowTitle(tr("IncaKoin") + " - " + tr("Wallet"));
+    setWindowTitle(tr("IncaKoin") + " - " + tr("1.5.3"));
 #ifndef Q_OS_MAC
     qApp->setWindowIcon(QIcon(":icons/IncaKoin"));
     setWindowIcon(QIcon(":icons/IncaKoin"));
